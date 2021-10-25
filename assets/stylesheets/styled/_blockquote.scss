@@ -1,0 +1,26 @@
+.styled-blockquote {
+  font-style: italic;
+  word-break: break-word;
+  font-size: em(22);
+  line-height: 1.4;
+
+  @include mq(small down) {
+    font-size: em(18);
+  }
+
+  > * + * {
+    margin-top: rem(20);
+  }
+
+  // author
+
+  > footer {
+    &::before {
+      content: "—";
+    }
+  }
+}
+
+.styled blockquote:not(.do-unstyle) {
+  @extend .styled-blockquote;
+}

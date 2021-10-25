@@ -1,0 +1,9 @@
+<div class="components-page-section <%= 'components-page-section--no-container' if local_assigns[:no_container].present? %>">
+  <div class="components-page-section__title">
+    <%= local_assigns[:title] %>
+  </div>
+
+  <div class="components-page-section__content">
+    <%= yield %>
+  </div>
+</div>

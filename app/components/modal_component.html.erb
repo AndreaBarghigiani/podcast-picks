@@ -1,0 +1,16 @@
+<%
+  # do not allow multiple insertions of a modal with the same @id
+  appended_modals = content_for(:modal_components_appended) || ""
+  appendix_name = "[#{@id}]"
+  return nil if appended_modals.include?(appendix_name)
+  appended_modals << appendix_name
+  content_for(:modal_components_appended, appended_modals)
+%>
+
+<% content_for :before_body_end do %>
+  <div class="modal" id="modal-<%= @id %>" aria-hidden="true">
+    <div class="modal__inner" role="dialog" aria-label="<%= @title %>">
+      <%= content %>
+    </div>
+  </div>
+<% end %>

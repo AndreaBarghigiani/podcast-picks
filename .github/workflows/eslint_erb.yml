@@ -1,0 +1,15 @@
+---
+name: runner
+on: [pull_request]
+jobs:
+  eslint_erb:
+    name: eslint.erb
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: eslint
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          eslint_flags: '--ext .html --ext .html.erb app/views'

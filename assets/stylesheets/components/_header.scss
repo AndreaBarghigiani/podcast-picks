@@ -1,0 +1,6 @@
+.header {
+  @include container;
+
+  padding-top: em(40);
+  padding-bottom: em(40);
+}

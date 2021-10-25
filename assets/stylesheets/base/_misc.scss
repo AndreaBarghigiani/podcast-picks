@@ -1,0 +1,26 @@
+// box shadow
+
+$bs-normal: rem(2 2 4) rgba($color-black, 0.25);
+
+// border radius
+
+$br-normal: rem(4);
+
+// hide native scrollbar
+
+@mixin hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// native outline
+
+@mixin native-outline {
+  outline: 1px dotted;
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
+}

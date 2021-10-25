@@ -1,0 +1,82 @@
+// ul
+
+.styled-ul {
+  font-size: em(15);
+
+  @include mq(medium up) {
+    font-size: em(17);
+  }
+
+  > li {
+    position: relative;
+    padding-left: 1.3em;
+    word-break: break-word;
+
+    &::before {
+      content: "";
+      width: 0.4em;
+      height: 0.4em;
+      position: absolute;
+      top: 0.5em;
+      left: 0;
+      background-color: currentColor;
+      border-radius: 50%;
+    }
+
+    + li,
+    ul,
+    ol {
+      margin-top: 0.5em;
+    }
+  }
+}
+
+.styled ul:not(.do-unstyle) {
+  @extend .styled-ul;
+}
+
+// ol
+
+.styled-ol {
+  font-size: em(15);
+  counter-reset: styled-ol;
+
+  @include mq(medium up) {
+    font-size: em(17);
+  }
+
+  > li {
+    counter-increment: styled-ol;
+    position: relative;
+    padding-left: 1.5em;
+    word-break: break-word;
+
+    + li,
+    ul,
+    ol {
+      margin-top: 0.5em;
+    }
+
+    &::before {
+      content: counter(styled-ol) ".";
+      position: absolute;
+      top: 0.1em;
+      left: 0;
+      color: currentColor;
+      border-radius: 50%;
+    }
+  }
+}
+
+.styled ol:not(.do-unstyle) {
+  @extend .styled-ol;
+}
+
+// dl
+
+// .styled-dl {
+// }
+
+// .styled dl:not(.do-unstyle) {
+//   @extend .styled-dl;
+// }

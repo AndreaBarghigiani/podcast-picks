@@ -1,0 +1,145 @@
+// h1
+
+.styled-h1 {
+  font-size: em(40);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  word-break: break-word;
+
+  @include ff-primary($weight: $fw-primary-bold);
+
+  @include mq(medium down) {
+    font-size: em(32);
+  }
+
+  @include mq(small down) {
+    font-size: em(24);
+  }
+
+  strong {
+    font-weight: inherit;
+  }
+}
+
+.styled h1:not(.do-unstyle) {
+  @extend .styled-h1;
+}
+
+// h2
+
+.styled-h2 {
+  font-size: em(28);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  word-break: break-word;
+
+  @include ff-primary($weight: $fw-primary-bold);
+
+  @include mq(medium down) {
+    font-size: em(24);
+  }
+
+  @include mq(small down) {
+    font-size: em(22);
+  }
+
+  strong {
+    font-weight: inherit;
+  }
+}
+
+.styled h2:not(.do-unstyle) {
+  @extend .styled-h2;
+}
+
+// h3
+
+.styled-h3 {
+  font-size: em(24);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  word-break: break-word;
+
+  @include ff-primary($weight: $fw-primary-bold);
+
+  @include mq(medium down) {
+    font-size: em(22);
+  }
+
+  @include mq(small down) {
+    font-size: em(20);
+  }
+
+  strong {
+    font-weight: inherit;
+  }
+}
+
+.styled h3:not(.do-unstyle) {
+  @extend .styled-h3;
+}
+
+// h4
+
+.styled-h4 {
+  font-size: em(20);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  word-break: break-word;
+
+  @include ff-primary($weight: $fw-primary-bold);
+
+  @include mq(medium down) {
+    font-size: em(18);
+  }
+
+  @include mq(small down) {
+    font-size: em(16);
+  }
+}
+
+.styled h4:not(.do-unstyle) {
+  @extend .styled-h4;
+}
+
+// h5
+
+.styled-h5 {
+  font-size: em(18);
+  line-height: 1.25;
+  word-break: break-word;
+
+  @include ff-primary($weight: $fw-primary-bold);
+
+  @include mq(medium down) {
+    font-size: em(16);
+  }
+
+  @include mq(small down) {
+    font-size: em(14);
+  }
+}
+
+.styled h5:not(.do-unstyle) {
+  @extend .styled-h5;
+}
+
+// h6
+
+.styled-h6 {
+  font-size: em(14);
+  line-height: 1.25;
+  letter-spacing: -0.05em;
+  word-break: break-word;
+  text-transform: uppercase;
+
+  @include ff-primary($weight: $fw-primary-bold);
+
+  @include mq(small down) {
+    font-size: em(13);
+  }
+}
+
+.styled h6:not(.do-unstyle) {
+  @extend .styled-h6;
+}

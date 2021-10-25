@@ -1,0 +1,37 @@
+// container
+
+.index-page-container {
+  @include container;
+
+  padding-top: em(40);
+  padding-bottom: em(40);
+
+  > * + * {
+    margin-top: em(40);
+  }
+}
+
+// clipboard
+
+.index-page-clipboard {
+  padding-top: em(40);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px dotted;
+
+  h2 {
+    @extend .styled-h3;
+
+    margin-bottom: em(20);
+    flex: 1 0 100%;
+  }
+
+  input {
+    width: em(240);
+    height: em(40);
+    padding: em(0 20);
+    margin-right: em(30);
+    border: 1px solid;
+  }
+}

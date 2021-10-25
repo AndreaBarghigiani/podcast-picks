@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    "stylelint-scss",
+    "stylelint-prettier",
+  ],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier",
+    "stylelint-prettier/recommended",
+  ],
+  "ignoreFiles": ["node_modules/**/*", "coverage/**/*", "public/packs-test/**/*"],
+  "rules": {
+    "prettier/prettier": true,
+    "at-rule-no-unknown": null,
+    "no-descending-specificity": null,
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignore": [
+          "custom-elements"
+        ]
+      }
+    ],
+  },
+}

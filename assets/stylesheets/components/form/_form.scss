@@ -1,0 +1,266 @@
+// @import "range";
+
+// input
+
+.form-input {
+  $this-placeholder-color: rgba($color-black, 0.5);
+
+  width: 100%;
+  height: em(40);
+  padding: em(0 15);
+  display: block;
+  font-size: em(15);
+  background-color: $color-white;
+  border: 1px solid $color-black;
+
+  &::-webkit-input-placeholder {
+    color: $this-placeholder-color;
+  }
+
+  &::-ms-input-placeholder {
+    color: $this-placeholder-color;
+  }
+
+  &::placeholder {
+    color: $this-placeholder-color;
+  }
+
+  &.\--placeholder {
+    color: $this-placeholder-color;
+  }
+
+  &.\--white {
+    background-color: $color-white;
+  }
+
+  // textarea
+
+  @at-root #{selector-unify(&, textarea)} {
+    min-height: em(180);
+    padding-top: em(20);
+    padding-bottom: em(20);
+    resize: vertical;
+  }
+
+  @at-root #{selector-unify(&, trix-editor)} {
+    height: auto;
+    min-height: em(180);
+    padding-top: em(20);
+    padding-bottom: em(20);
+  }
+
+  // select
+
+  @at-root #{selector-unify(&, select)} {
+    appearance: none;
+    padding-right: em(42);
+    background-image: url(svg-icon("chevron-down.svg", $color-black));
+    background-size: em(10);
+    background-position: center right rem(10);
+    background-repeat: no-repeat;
+
+    &[multiple] {
+      height: em(180);
+      padding-top: em(10);
+      padding-bottom: em(10);
+      background-image: none;
+    }
+  }
+}
+
+// checkbox/radio
+
+.form-checkbox {
+  width: 100%;
+  padding-left: em(30);
+  display: block;
+  position: relative;
+  font-size: em(15);
+  cursor: pointer;
+
+  input {
+    width: em(21);
+    height: em(21);
+    position: absolute;
+    left: 0;
+    background-color: $color-white;
+    border: 1px solid $color-black;
+    cursor: inherit;
+
+    &:checked {
+      background-color: $color-black;
+      border-color: $color-black;
+    }
+
+    // &[type="checkbox"] {
+    // }
+
+    &[type="radio"] {
+      border-radius: 50%;
+    }
+  }
+
+  a {
+    @extend .styled-a;
+  }
+}
+
+// radios as button with icons
+
+.form-checkicon {
+  display: flex;
+
+  input {
+    @include hide-visually;
+
+    &:checked + label {
+      background-color: rgba($color-black, 0.2);
+    }
+  }
+
+  label {
+    width: 100%;
+    padding: em(24 16);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid $color-black;
+    cursor: pointer;
+
+    // &[for=""]::before {
+    //   background-image: url(svg-icon("checkmark.svg", $color-black));
+    // }
+
+    &::before {
+      content: "";
+      width: em(44);
+      height: em(44);
+      margin-bottom: em(20);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      // background-image: url(svg-icon("checkmark.svg", $color-black));
+    }
+  }
+}
+
+.form-checkicons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(#{em(140)}, 1fr));
+  column-gap: em(20);
+}
+
+// date (yearh, month, day)
+
+.form-date {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(#{em(140)}, 1fr));
+  column-gap: em(20);
+}
+
+// label
+
+.form-label:not(.\--unstyled) {
+  @include ff-primary($weight: $fw-primary-bold);
+
+  margin-bottom: em(10);
+  display: block;
+  font-size: em(16);
+
+  @include mq(small down) {
+    font-size: em(14);
+  }
+
+  abbr {
+    opacity: 0.5;
+    cursor: help;
+  }
+}
+
+// hint
+
+.form-hint {
+  margin-top: em(8);
+  font-size: em(14);
+
+  @include mq(small down) {
+    font-size: em(13);
+  }
+
+  a {
+    @extend .styled-a;
+  }
+}
+
+// error
+
+.form-error {
+  margin-top: em(8);
+  padding: em(6 10);
+  font-size: em(13);
+  color: $color-white;
+  background-color: $color-black;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+// row
+
+.form-row {
+  &.\--checkboxes {
+    &:not(.\--inline) .form-checkbox:not(:last-child) {
+      margin-bottom: em(16);
+    }
+
+    &.\--inline {
+      display: flex;
+      flex-wrap: wrap;
+
+      .form-label {
+        margin-bottom: em(-8);
+        flex: 1 0 100%;
+      }
+
+      .form-checkbox {
+        width: auto;
+        margin: em(18 24 0 0);
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.form-rows {
+  > .form-row:not(:last-child) {
+    margin-bottom: em(30);
+  }
+}
+
+// response (general message: error or success)
+
+.form-response {
+  width: 100%;
+  padding: em(10 16);
+  display: none;
+  font-size: em(15);
+  color: $color-white;
+
+  &--error,
+  &--success {
+    display: block;
+  }
+
+  &--error {
+    background-color: $color-black;
+  }
+
+  &--success {
+    background-color: $color-black;
+  }
+}

@@ -1,0 +1,9 @@
+// based on Webpack's `svg-transform-loader`
+// allows to inline a SVG icon and set a color
+// use example: `background-image: url(svg-icon('icon.svg', $color-grey));`
+
+@function svg-icon($file, $color) {
+  $color: str-replace(inspect($color), "#", "%23");
+  $file: "../images/icons-css/#{$file}?fill=#{$color}";
+  @return $file;
+}

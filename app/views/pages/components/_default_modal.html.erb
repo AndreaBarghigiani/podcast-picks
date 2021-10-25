@@ -1,0 +1,9 @@
+<%= render 'pages/components/_section', title: 'Default modal' do %>
+  <button type="button" class="styled-a" data-modal-show="example">
+    Show modal
+  </button>
+<% end %>
+
+<% render DefaultModalComponent.new(id: "example", title: "Example") do %>
+  Hi there!
+<% end%>

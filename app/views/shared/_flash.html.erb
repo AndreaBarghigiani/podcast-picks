@@ -1,0 +1,7 @@
+<div class="flash flash--<%= notice.present? ? "notice" : "alert" %>">
+  <div class="flash__inner">
+    <div class="flash__message">
+      <%= notice.presence || alert.presence %>
+    </div>
+  </div>
+</div>

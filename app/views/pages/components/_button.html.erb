@@ -1,0 +1,115 @@
+<%= render 'pages/components/_section', title: 'Button' do %>
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black
+    ) do %>
+      Button
+    <% end %>
+
+    <%= render ButtonComponent.new(
+      href: root_path,
+      fill: :black
+    ) do %>
+      Link
+    <% end %>
+  </div>
+
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black
+    ) do %>
+      Fill Black
+    <% end %>
+
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :white
+    ) do %>
+      Fill White
+    <% end %>
+  </div>
+
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      outline: :black
+    ) do %>
+      Outline Black
+    <% end %>
+  </div>
+
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      color: :black
+    ) do %>
+      Color Black
+    <% end %>
+  </div>
+
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black
+    ) do %>
+      Size default
+    <% end %>
+
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black,
+      size: :small
+    ) do %>
+      Size small
+    <% end %>
+
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black,
+      size: :xsmall
+    ) do %>
+      Size xsmall
+    <% end %>
+  </div>
+
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black,
+      icon: :delete
+    ) do %>
+      Icon delete
+    <% end %>
+
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :white,
+      icon: :delete,
+      icon_only: true
+    ) do %>
+      Icon only delete
+    <% end %>
+  </div>
+
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black,
+      display: :block,
+    ) do %>
+      Display block
+    <% end %>
+  </div>
+
+  <div class="components-page-buttons">
+    <%= render ButtonComponent.new(
+      type: :button,
+      disabled: true,
+      fill: :black
+    ) do %>
+      Button
+    <% end %>
+  </div>
+<% end %>

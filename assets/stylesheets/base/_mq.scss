@@ -1,0 +1,25 @@
+// MEDIA QUERIES BREAKPOINTS
+// Used by "oddcamp/sass-utils"
+// Usage examples with @mq mixin:
+//  - mq(medium down)
+//  - mq(large up)
+//  - mq(between small large)
+//  - mq(portrait)
+//  - mq(portrait, between small medium, xxxxlarge up, xxsmall down)
+
+$mq-breakpoints: (
+  xxxsmall: 0,
+  xxsmall: 320,
+  xsmall: 480,
+  small: 640,
+  medium: 768,
+  large: 960,
+  xlarge: 1024,
+  xxlarge: 1200,
+  xxxlarge: 1400,
+  xxxxlarge: 1680,
+);
+
+// global mobile breakpoint
+
+$mq-mobile: medium;

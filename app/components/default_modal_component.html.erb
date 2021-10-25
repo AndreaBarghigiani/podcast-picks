@@ -1,0 +1,32 @@
+<% render ModalComponent.new(id: @id, title: @title) do %>
+  <div class="default-modal-overlay">
+    <div>
+      <div class="default-modal">
+        <div class="default-modal__inner">
+          <header class="default-modal__header">
+            <h2 class="default-modal__header__heading">
+              <%= @title %>
+            </h2>
+
+            <div class="default-modal__header__close">
+              <%= render ButtonComponent.new(
+                type: "button",
+                size: "xsmall",
+                color: "red",
+                icon: "delete",
+                icon_only: true,
+                classname: "js--modal-close",
+              ) do %>
+                Close
+              <% end %>
+            </div>
+          </header>
+
+          <div class="default-modal__body">
+            <%= content %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

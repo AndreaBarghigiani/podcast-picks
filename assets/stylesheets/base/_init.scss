@@ -1,0 +1,57 @@
+* {
+  line-height: calc(2px + 2ex + 2px);
+  // ^ https://hugogiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+html {
+  @include ff-primary;
+
+  font-size: 100%; // a11y, keep it percentage
+  color: $color-black;
+  background-color: $color-white;
+  scroll-behavior: smooth;
+  scroll-padding-top: rem(20);
+
+  &.\--disable-scroll {
+    overflow: hidden;
+  }
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  @include ff-primary($weight: $fw-primary-bold);
+}
+
+del {
+  text-decoration: line-through;
+}
+
+summary {
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+a:active,
+summary:active,
+button:not([disabled]):active,
+[role="button"]:not([disabled]):active {
+  opacity: 0.6;
+}

@@ -1,0 +1,20 @@
+---
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("DATABASE_POOL") { 5 } %>
+
+development:
+  <<: *default
+  database: testing_blog_development
+  url: <%= ENV['DATABASE_URL'] %>
+
+test:
+  <<: *default
+  database: testing_blog_test
+  url: <%= ENV['DATABASE_URL'] %>
+
+production:
+  <<: *default
+  database: testing_blog_production
+  url: <%= ENV['DATABASE_URL'] %>

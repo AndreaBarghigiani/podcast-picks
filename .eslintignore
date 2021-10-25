@@ -1,0 +1,7 @@
+app/**/*.rb
+assets/stylesheets/*
+assets/images/*
+node_modules/*
+coverage/*
+public/*
+tmp/*

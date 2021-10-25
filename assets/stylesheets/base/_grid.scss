@@ -1,0 +1,25 @@
+$grid-container-widths: (
+  wide: 1680,
+  normal: 1280,
+  narrow: 1024,
+  xnarrow: 768,
+  xxnarrow: 640,
+  xxxnarrow: 480,
+);
+
+$grid-gutter: 20;
+
+@mixin container($width: normal, $center: true, $nested: false) {
+  width: 100%;
+  max-width: rem(map-get($grid-container-widths, $width));
+
+  @if $center == true {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @if $nested == false {
+    padding-left: rem($grid-gutter);
+    padding-right: rem($grid-gutter);
+  }
+}

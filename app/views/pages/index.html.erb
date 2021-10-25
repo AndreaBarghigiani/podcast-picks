@@ -1,0 +1,24 @@
+<div class="index-page-container">
+  <%= render StyledComponent.new do %>
+    <h1>Index</h1>
+
+    <p>
+      Go to <%= link_to "components", components_path %> page.
+    </p>
+  <% end %>
+
+  <div class="index-page-clipboard" data-controller="index-page-clipboard">
+    <h2>Stimulus example</h2>
+
+    <input type="text" placeholder="Enter the text to copy" data-index-page-clipboard-target="source"/>
+
+    <%= render ButtonComponent.new(
+      type: :button,
+      fill: :black,
+      size: :small,
+      data: {action: 'index-page-clipboard#copy'}
+    ) do %>
+      Copy
+    <% end %>
+  </div>
+</div>

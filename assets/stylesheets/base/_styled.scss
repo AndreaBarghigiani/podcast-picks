@@ -1,0 +1,9 @@
+@mixin styled-extend($type: false) {
+  @if $type {
+    @extend .styled-#{$type};
+  }
+
+  &:not(.do-unstyle) {
+    @content;
+  }
+}

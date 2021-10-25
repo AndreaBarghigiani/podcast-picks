@@ -1,0 +1,13 @@
+.styled-a {
+  text-decoration: underline;
+  color: $color-black;
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+}
+
+.styled a:not(.do-unstyle) {
+  @extend .styled-a;
+}

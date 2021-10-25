@@ -1,0 +1,34 @@
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  word-break: break-word;
+
+  // thead {
+  // }
+
+  // tbody {
+  // }
+
+  // tfoot {
+  // }
+
+  tr {
+    & + tr {
+      border-top: solid 1px;
+    }
+  }
+
+  th {
+    text-align: left;
+    padding: 0.5em;
+    border-bottom: solid 1px;
+  }
+
+  td {
+    padding: 0.5em;
+  }
+}
+
+.styled table:not(.do-unstyle) {
+  @extend .styled-table;
+}

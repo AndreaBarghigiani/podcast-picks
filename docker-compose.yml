@@ -1,0 +1,82 @@
+---
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        GITHUB_ACCESS_TOKEN: "${GITHUB_ACCESS_TOKEN}"
+    image: testing_blog
+    volumes:
+      - .:/app:delegated
+      - bundler:/asdf/.gems
+      - node_modules:/app/node_modules
+      - /app/tmp/cache
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+      - .env_default
+    environment:
+      BUNDLE_GITHUB__COM: "${GITHUB_ACCESS_TOKEN}:x-oauth-basic"
+      BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "${GITHUB_ACCESS_TOKEN}:x-oauth-basic"
+    depends_on:
+      - postgres
+      # - redis
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0"
+    tty: true
+    stdin_open: true
+
+  webpacker:
+    image: testing_blog
+    volumes:
+      - .:/app:delegated
+      - bundler:/asdf/.gems
+      - node_modules:/app/node_modules
+      - /app/tmp/cache
+    env_file:
+      - .env
+      - .env_default
+    environment:
+      DISABLE_SPRING: 1
+    ports:
+      - "3035:3035"
+    command: bin/webpack-dev-server
+    depends_on:
+      - app
+
+  postgres:
+    image: postgres:13-alpine
+    volumes:
+      - ./tmp/backup:/tmp/backup:cached
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+
+  # redis:
+  #   image: redis:4-alpine
+  #   ports:
+  #     - "6379:6379"
+
+  spring:
+    image: testing_blog
+    volumes:
+      - .:/app:delegated
+      - bundler:/asdf/.gems
+      - /app/tmp/cache
+    env_file:
+      - .env
+      - .env_default
+    pid: host
+    command: /bin/sh -c "rm -f tmp/spring.pid tmp/spring.sock && bundle exec spring server"
+    depends_on:
+      - app
+
+volumes:
+  node_modules:
+  bundler:
+  pgdata:

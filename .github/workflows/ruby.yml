@@ -1,0 +1,103 @@
+---
+name: ci
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: ruby
+    runs-on: ubuntu-latest
+
+    services:
+      # redis:
+      #   image: redis
+      #   ports:
+      #     - 6379:6379
+      #   options: >-
+      #     --health-cmd "redis-cli ping"
+      #     --health-interval 10s
+      #     --health-timeout 5s
+      #     --health-retries 5
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Read .tool-versions
+        uses: marocchino/tool-versions-action@v1
+        id: versions
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs}}
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache yarn
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('.tool-versions') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('.tool-versions') }}-
+      - name: Cache gems
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('.tool-versions') }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('.tool-versions') }}-
+      - name: Run yarn
+        run: yarn
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+        env:
+          RAILS_ENV: test
+          BUNDLE_GITHUB__COM: "${{ secrets.GH_DEPLOYER_TOKEN }}:x-oauth-basic"
+          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "${{ secrets.GH_DEPLOYER_TOKEN }}:x-oauth-basic"
+      - name: Load database schema
+        run: bundle exec rake db:schema:load
+        env:
+          RAILS_ENV: test
+          ELASTICSEARCH_URL: localhost:9200
+          DATABASE_URL: postgres://postgres:password@localhost:5432/postgres
+      - name: Run webpacker
+        run: bundle exec rails webpacker:compile
+        env:
+          RAILS_ENV: test
+          ELASTICSEARCH_URL: localhost:9200
+          DATABASE_URL: postgres://postgres:password@localhost:5432/postgres
+      # - name: Run tests
+      #   run: bundle exec rake spec
+      #   env:
+      #     COVERAGE: true
+      #     RAILS_ENV: test
+      #     ELASTICSEARCH_URL: localhost:9200
+      #     DATABASE_URL: postgres://postgres:password@localhost:5432/postgres
+      # - name: Upload coverage results
+      #   uses: actions/upload-artifact@master
+      #   if: always()
+      #   with:
+      #     name: coverage-report
+      #     path: coverage

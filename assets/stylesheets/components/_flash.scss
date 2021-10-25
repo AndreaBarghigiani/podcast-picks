@@ -1,0 +1,35 @@
+.flash {
+  $this-notice: "#{&}--notice";
+  $this-alert: "#{&}--alert";
+
+  width: 100%;
+  position: fixed;
+  z-index: $zi-flash;
+  top: em(20);
+  left: 0;
+  pointer-events: none;
+
+  &__inner {
+    @include container(xxxnarrow);
+
+    display: flex;
+    justify-content: center;
+  }
+
+  &__message {
+    padding: em(12 26);
+    text-align: center;
+    color: $color-white;
+    background-color: $color-black;
+    border-radius: 999em;
+    pointer-events: auto;
+
+    #{$this-notice} & {
+      background-color: $color-black;
+    }
+
+    #{$this-alert} & {
+      background-color: $color-black;
+    }
+  }
+}
